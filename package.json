@@ -1,0 +1,203 @@
+{
+    "name": "MySQL-tool",
+    "displayName": "MySQL Tool",
+    "description": "MySQL management tool  is a unified visual tool for database architects, developers, and DBAs. It provides various functionality for designing, developing, and administering databases. It’s available in 1 editions ,Community edition. Community edition is a free open-source edition offering a basic set of features.",
+    "version": "1.0.2",
+    "publisher": "wycliffepepela",
+    "author": {
+        "name": "Wycliffe Pepela",
+        "email": "Wycliffepepela01@gmail.com",
+        "url": "http://twitter.com/wycliffepepela4"
+      },
+    "sponsor": {
+        "url": "https://github.com/sponsors/pepelawycliffe"
+    },
+    "icon": "logo.png",
+    "engines": {
+        "vscode": "^1.57.0"
+    },
+    "categories": [
+        "Programming Languages",
+        "Azure",
+        "Other"
+    ],
+    "galleryBanner": {
+        "color": "#963695",
+        "theme": "light"
+    },
+    "keywords": [
+        "SQL",
+        "html preview",
+        "live preview",
+        "MySQL",
+        "live reload",
+        "Database",
+        "svg preview",
+        "DB",
+        "open in browser",
+        "multi-root ready",
+        "RDBMS"
+    ],
+    "bugs": {
+        "url": "https://github.com/pepelawycliffe/MySQL-tool/issues",
+        "email": "wycliffepepela01@gmail.com"
+    },
+    "homepage": "https://github.com/pepelawycliffe/MySQL-tool/blob/master/README.md",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/pepelawycliffe/MySQL-tool.git"
+    },
+    "activationEvents": [
+        "onView:mysql",
+        "onCommand:mysql.addConnection",
+        "onCommand:mysql.runQuery"
+    ],
+    "main": "./out/extension",
+    "contributes": {
+        "views": {
+            "explorer": [
+                {
+                    "id": "mysql",
+                    "name": "MySQL"
+                }
+            ]
+        },
+        "commands": [
+            {
+                "command": "mysql.refresh",
+                "title": "Refresh",
+                "category": "MySQL"
+            },
+            {
+                "command": "mysql.addConnection",
+                "title": "Add Connection",
+                "icon": {
+                    "light": "resources/light/add.svg",
+                    "dark": "resources/dark/add.svg"
+                },
+                "category": "MySQL"
+            },
+            {
+                "command": "mysql.deleteConnection",
+                "title": "Delete Connection",
+                "category": "MySQL"
+            },
+            {
+                "command": "mysql.runQuery",
+                "title": "Run MySQL Query",
+                "category": "MySQL"
+            },
+            {
+                "command": "mysql.newQuery",
+                "title": "New Query",
+                "category": "MySQL"
+            },
+            {
+                "command": "mysql.selectTop1000",
+                "title": "Select Top 1000",
+                "category": "MySQL"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "mysql.runQuery",
+                "key": "ctrl+alt+e",
+                "when": "editorLangId == sql"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "mysql.runQuery",
+                    "when": "editorLangId == sql",
+                    "group": "navigation"
+                }
+            ],
+            "view/title": [
+                {
+                    "command": "mysql.addConnection",
+                    "when": "view == mysql",
+                    "group": "navigation@1"
+                }
+            ],
+            "view/item/context": [
+                {
+                    "command": "mysql.newQuery",
+                    "when": "view == mysql && viewItem == connection",
+                    "group": "mysql@1"
+                },
+                {
+                    "command": "mysql.refresh",
+                    "when": "view == mysql && viewItem == connection",
+                    "group": "mysql@1"
+                },
+                {
+                    "command": "mysql.deleteConnection",
+                    "when": "view == mysql && viewItem == connection",
+                    "group": "mysql@2"
+                },
+                {
+                    "command": "mysql.newQuery",
+                    "when": "view == mysql && viewItem == database",
+                    "group": "mysql@0"
+                },
+                {
+                    "command": "mysql.refresh",
+                    "when": "view == mysql && viewItem == database",
+                    "group": "mysql@1"
+                },
+                {
+                    "command": "mysql.selectTop1000",
+                    "when": "view == mysql && viewItem == table",
+                    "group": "mysql@0"
+                },
+                {
+                    "command": "mysql.refresh",
+                    "when": "view == mysql && viewItem == table",
+                    "group": "mysql@1"
+                }
+            ]
+        },
+        "configuration": {
+            "type": "object",
+            "title": "MySQL",
+            "properties": {
+                "vscode-mysql.enableTelemetry": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Whether to enable anonymous usage collection."
+                },
+                "vscode-mysql.maxTableCount": {
+                    "type": "integer",
+                    "default": 500,
+                    "description": "The maximum table count shown in the tree view"
+                },
+                "vscode-mysql.enableDelimiterOperator": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable support for DELIMITER operator."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "tslint": "tslint -t verbose src/**/*.ts"
+    },
+    "devDependencies": {
+        "@types/keytar": "^4.0.1",
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^7.10.14",
+        "@types/vscode": "^1.57.0",
+        "tslint": "^5.8.0",
+        "typescript": "^3.9.10"
+    },
+    "dependencies": {
+        "applicationinsights": "^1.0.0",
+        "asciitable": "0.0.7",
+        "mysql": "^2.15.0",
+        "uuid": "^3.1.0"
+    }
+}
